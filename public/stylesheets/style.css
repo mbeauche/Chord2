@@ -1,0 +1,393 @@
+/* ---------------------------------- Rainbow Theme Styles  ---------------------------------- */
+html, body, div, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, p, blockquote,  
+pre, form, fieldset, table, th, td { margin: 0; padding: 0; }
+
+body {
+	background:url(/images/bg.png) repeat top #b9eeff;
+	font-family:Arial, Helvetica, sans-serif;
+}
+#main {
+	width:986px;
+	float:left;
+}
+#container {
+	width:986px;
+	margin:0 auto;
+}
+#header {
+	height:88px;
+	margin: 20px 0 0 0;
+}
+	#moodlogo {
+		position: absolute;
+		top:37px;
+		width:300px;
+		height:87px;
+		background:url(/images/logo.gif) no-repeat;
+		z-index:2;
+	}
+	#hiddenlogo {
+		width:300px;
+		height:87px;
+		display:none;
+	}
+	#moodlogoholder {
+		float:left;
+		margin:0 20px 0 0;
+		width:300px;
+		height:87px;
+	}
+	#userstatus {
+		float: left;
+		width:650px;
+		margin: 20px 0 0 0;
+		text-align: right;
+	}
+	
+	#moodmenu {
+		width:100%;
+	}
+	
+	#moodmenu ul {
+		text-decoration:none;
+		list-style-type:none;
+	}
+	#moodmenu li {
+		float:left;
+		font-size:12px;
+		margin:7px 0 0 8px;
+	}
+	#moodmenu li a{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+	}
+	#moodmenu li a:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+	}
+	#moodmenu li a:active{
+	position:relative;
+	top:1px;
+	}
+.prettyline {
+	border-top:thin solid #000;
+	width:665px;
+	float: left;
+	margin:0 0 0 320px;
+}
+#content{
+	float: left;
+	width:100%;
+}
+.sidebar{
+	margin:10px 0 0 0;
+	width:349px;
+	float: left;
+	border-left:thin solid #c8fcfe;
+}
+.bodycontent{
+	margin:10px 0 0 0;
+	width:636px;
+	float: left;
+}
+
+#footer{}
+
+.moodmusicarea {
+	background:url(/images/music.png) no-repeat left top;
+	margin: 20px 0 0 10px;
+	padding: 0 0 0 40px;
+	float: left;
+}
+
+.createtimerarea {
+	background:url(/images/right.png) no-repeat left top;
+	margin: 20px 0 0 10px;
+	padding: 0 0 0 40px;
+	float: left;
+}
+
+/* ---------------------------------- Individual Timer Styles  ---------------------------------- */
+
+#timers {
+	width:100%;
+}
+.timerentry {
+	width:550px;
+	height:170px;
+	float:left;
+	margin:0 0 15px 20px;
+	border-top:thin solid #def7fe;
+	background:url(/images/lonetimerbg.png) repeat-x top;
+
+}
+.timerbutton {
+	float:left;
+	height:20px;
+	width:150px;
+	border:thin solid #000;
+}
+	.timerduration {
+		float:left;
+		height:20px;
+		width:220px;
+		text-align: right;
+	}
+	.removetimerbutton {
+		float:right;
+		height:50px;
+		width:50px;
+		cursor:pointer;
+		cursor:hand;
+		background:url(/images/cancel.png) no-repeat top;
+	}
+	.restarttimerbutton {
+		float:right;
+		height:50px;
+		width:50px;
+		cursor:pointer;
+		cursor:hand;
+		background:url(/images/sync.png) no-repeat top;
+	}
+.timercomment {
+	float:left;
+	width:500px;
+	height:35px;
+	margin: 5px 0 5px 5px;
+	font-size:30px;
+	overflow: auto;
+	background:url(/images/info.png) no-repeat left center;
+	padding: 0 0 0 40px;
+}
+
+.timerdisplay {
+	height:90px;
+	width:300px;
+	float:left;
+	text-align:center;
+	vertical-align:middle;
+	font-size:75px;
+}
+
+.progressbar {
+	height:20px;
+	width:550px;
+	float: left;
+	border-left:thin solid #00a8ab;
+	border-right:thin solid #00a8ab;
+}
+.progress{
+	height:20px;
+	float: left;
+	text-align: left;
+	background:url(/images/loading.gif) repeat-x top;
+	border-right:thin solid #00a8ab;
+}
+.timerid {
+	visibility: hidden;
+}
+/* ---------------------------------- Lightbox Styles  ---------------------------------- */
+#lightbox {
+	background:#333;
+	height:100%;
+	width:100%;
+	z-index:1000;
+	position:absolute;
+	float:left;
+	opacity: 0.5;
+}
+#lightboxcore {
+	background:#FFF;
+	z-index:1001;
+	border:thick solid #009;
+	padding:10px;
+	position:absolute;
+	
+	border-radius: 15px;
+}
+
+/* ---------------------------------- Timer Creation form styles  ---------------------------------- */
+.timerformbutton {
+	background:url(/images/buttonbg.png) repeat-x top;
+	height:60px;
+	width:60px;
+	float:left;
+	border:thin solid #000;
+	text-align:center;
+	vertical-align:middle;
+	font-size:45px;
+	
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	
+	cursor:pointer;
+	cursor:hand;
+}
+#timername {
+	font-size:30px;
+	width:500px;
+}
+#durationminutes {
+	width: 300px;
+}
+#durationseconds {
+	width: 300px;
+	background:#09F;
+}
+#timerformsubmit {
+	width: 500px;
+}
+.newline {
+	width:100%;
+	float:left;
+	margin:0 0 15px 0;
+}
+
+.defaultTextActive{
+	color:gray;
+}
+
+/* ---------------------------------- Login/Register box styles  ---------------------------------- */
+
+.login-form,
+.login-form h1,
+.login-form input,
+.login-form label {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+}
+
+.login-form {
+	position: relative;
+	width: 200px;
+	height: 150px;
+	padding: 10px 15px 0 10px;
+	cursor: default;
+
+
+	-webkit-border-radius: 5px;
+
+	border-radius: 5px;
+
+
+}
+
+.login-form input[type=text],
+.login-form input[type=password],
+.login-form input[type=submit] {
+	line-height: 14px;
+	margin: 5px 0;
+	padding: 6px 15px;
+	border: 0;
+	outline: none;
+
+	font-family: Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	text-shadow: 0px 1px 1px rgba(255,255,255, .2);
+
+	-webkit-border-radius: 26px;
+
+	border-radius: 26px;
+
+}
+input::-webkit-input-placeholder {
+	color:#777777;
+}
+
+.login-form input[type=text],
+.login-form input[type=password],
+.js .login-form span {
+	color: #686868;
+	width: 170px;
+
+	-webkit-box-shadow: inset 1px 1px 1px 0px rgba(255,255,255, .6);
+
+	box-shadow: inset 1px 1px 1px 0px rgba(255,255,255, .6);
+
+	background: #989898;
+
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#989898));
+	background: -webkit-linear-gradient(top,  #ffffff 0%,#989898 100%);
+	background: -o-linear-gradient(top,  #ffffff 0%,#989898 100%);
+	background: -ms-linear-gradient(top,  #ffffff 0%,#989898 100%);
+	background: linear-gradient(top,  #ffffff 0%,#989898 100%);
+}
+
+.login-form input[type=text]:hover,
+.login-form input[type=password]:hover {
+	-webkit-box-shadow: inset 1px 1px 1px 0px rgba(255,255,255, .6), 0px 0px 5px rgba(255,255,255, .5);
+
+	box-shadow: inset 1px 1px 1px 0px rgba(255,255,255, .6), 0px 0px 5px rgba(255,255,255, .5);
+}
+
+.login-form input[type=text]:focus,
+.login-form input[type=password]:focus {
+	background: #e1e1e1;
+
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e1e1e1));
+	background: -webkit-linear-gradient(top,  #ffffff 0%,#e1e1e1 100%);
+	background: -o-linear-gradient(top,  #ffffff 0%,#e1e1e1 100%);
+	background: -ms-linear-gradient(top,  #ffffff 0%,#e1e1e1 100%);
+	background: linear-gradient(top,  #ffffff 0%,#e1e1e1 100%);
+}
+
+.login-form input[type=submit] {
+	float: right;
+	cursor: pointer;
+
+	color: #445b0f;
+
+	-webkit-box-shadow: inset 1px 1px 1px 0px rgba(255,255,255, .45), 0px 1px 1px 0px rgba(0,0,0, .3);
+
+	box-shadow: inset 1px 1px 1px 0px rgba(255,255,255, .45), 0px 1px 1px 0px rgba(0,0,0, .3);
+}
+
+.login-form input[type=submit]:hover {
+	color:#4C0C34;
+	-webkit-box-shadow: inset 1px 1px 3px 0px rgba(255,255,255, .8), 0px 1px 1px 0px rgba(0,0,0, .6);
+
+	box-shadow: inset 1px 1px 3px 0px rgba(255,255,255, .8), 0px 1px 1px 0px rgba(0,0,0, .6);
+}
+
+.login-form input[type=submit]:active {
+	-webkit-box-shadow: none;
+
+	box-shadow: none;
+	color:#4C0C34;
+}
+
+.login-form input[type=submit] {
+	background: #a5cd4e;
+
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a5cd4e), color-stop(100%,#6b8f1a));
+	background: -webkit-linear-gradient(top,  #a5cd4e 0%,#6b8f1a 100%);
+	background: -o-linear-gradient(top,  #a5cd4e 0%,#6b8f1a 100%);
+	background: -ms-linear-gradient(top,  #a5cd4e 0%,#6b8f1a 100%);
+	background: linear-gradient(top,  #a5cd4e 0%,#6b8f1a 100%);
+}
