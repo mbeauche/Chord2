@@ -1,9 +1,8 @@
-A basic timer application that allows users to create timers to track daily events.
-The applicaton has the option to enter a mood. A playlist is automatically generated
-based on the user's mood. Timers are saved to a database so users will be able to access
-their timers from anywhere on the internet. Timers can be deleted and restarted. 
+A reservation system for music practice rooms at UMass Amherst. Allows
+users to select re-occuring practice reservations as well as cancel or
+swap individual instances. The main page will display the user's 
+personal schedule of reserved rooms.  
 
-We plan to use node.js, express, socket.io, mongodb, jquery, and many other sweet technologies.
+We plan to use node.js, express, socket.io, mongodb and jquery.
 
-To run this application you need MongoDB, Mongoose, and a package called "zombie." To install
-"zombie" you can run "npm install zombie".
+To run this application you need MongoDB, and Mongoose.
