@@ -4,34 +4,33 @@ var mongoose = require('mongoose') , Schema = mongoose.Schema;
 var db = mongoose.connect('mongodb://127.0.0.1/chord');
 
 var Roomschema = new Schema({
-	start		:Number,
-	end			:Number,
-	duration	:Number,
-	repeat		:Number,
-	interval	:Number,
-	type		:Number,
-	comment		:String
+	roomname	:String,
+	roomtype	:String,
+	location	:String
 });
 
 var Userschema = new Schema({
 	username	:{ type: String, index: true, unique: true, lowercase: true },
 	password	:{ type: String, required: true},
-	timers		:[Timerschema]
+	//timers		:[Timerschema],
+	major       :String,
+	fullname   :String
 });
 
 
 var Reservationschema = new Schema({
-    title     : { type: String, index: true }
-  , slug      : { type: String, lowercase: true, trim: true }
-  , date      : Date
-  , buf       : Buffer
-  , comments  : [Comment]
-  , creator   : Schema.ObjectId
+    username  : { type: String, index: true },
+    roomname  : { type: String, lowercase: true, trim: true },
+    Time      : String,
+    date      : Date,
+    inSwap    : Boolean,
+    swapNote  : String
 });
 
 
 var User = mongoose.model('Users', Userschema);
-var Timer = mongoose.model('Timers', Timerschema);
+var Room = mongoose.model('Rooms', Roomschema);
+var Reservations = mongoose.model('Reservations', Reservationschema);
 
 //Timer functions
 exports.saveTimer = function(user,timer,cb){
@@ -95,16 +94,20 @@ var query;
 
 //User Functions
 exports.validateUser = function(username, password, cb){
+	console.log("got username " + username);
+	console.log(User.find());
 	User.findOne({username:username, password:password}).run(function (err, user) {
 		cb(user);
 	});
 };
 
-exports.newUser = function(req, res, username, password ){
+exports.newUser = function(req, res, username, password, fullname, major ){
 
 var user = new User();
 	user.username = username;
 	user.password = password;
+	user.fullname = fullname;
+	user.major    = major;
 
 	User.findOne({username:username}).run(function(err, query){
 		if(query !== null){

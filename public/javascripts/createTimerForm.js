@@ -43,6 +43,8 @@ $(document).ready(function() {
 	}
 
 	//Make that title box look damn pretty
+
+	/*
 	$('#timername').focus(function(srcc) {
 		if($(this).val() == $(this)[0].title) {
 			$(this).removeClass("defaultTextActive");
@@ -57,6 +59,8 @@ $(document).ready(function() {
 		}
 	});
 	$('#timername').blur();
+
+	*/
 	
 	//Timer window and duration adjustment buttons
 	$("#durationminus").click(function() {

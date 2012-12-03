@@ -49,7 +49,6 @@ exports.logout = function(req, res){
 
 //post page for checking log in information
 exports.validatelogin = function(req, res){
-	var message = "That didnt work at all...";
 	var uname = req.body.usname;
 	var pword = req.body.password3;
 	if(uname != null && pword != null){
@@ -66,11 +65,12 @@ exports.validatelogin = function(req, res){
 
 //Post page for checking registration information
 exports.validateregister = function(req, res){
-  	var message = "That didnt work at all...";
 	var uname = req.body.name;
 	var pword = req.body.password1; 
+	var fullname = req.body.fullname;
+	var major = req.body.major;
 	if(uname != null && pword != null){
-		message = db.newUser(req, res, uname,pword);
+		message = db.newUser(req, res, uname, pword, fullname, major);
 		//res.render('loginregister', { title: message, name: "Not Logged In" });
 		//return;
 	}
