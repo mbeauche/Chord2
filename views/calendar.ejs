@@ -1,11 +1,35 @@
 <br/>
 <h1><%= title %></h1>
 <br/>
-<ul>
 
-<% events.forEach(function(event){ %>
-  <li>
-    <%= event %>
-  </li>
-<%})%>
-</ul>
+
+
+<form name="add" action="/add" method="post" onsubmit="return validateCreate()">
+
+	<input type="text" name="username" placeholder="username" /> </br>
+
+	<input type="text" name="roomname" placeholder="room name" /></br>
+
+	<input type="text" name="starttime" placeholder="start time" /></br>
+
+	<input type="text" name="endtime" placeholder="end time" /></br>
+
+	<input type="text" name="startdate" placeholder="start date" /></br>
+
+	<input type="text" name="enddate" placeholder="end date" /></br>
+
+	<input type="text" name="inswap" placeholder="in swap?" /></br>
+
+	<input type="text" name="swapnote" placeholder="swap note" /></br>
+
+	<input type="submit" value="ADD IT ALL">
+</form> 
+
+<form name="register" action="/validateregister" method="post" onsubmit="return validateCreate()">
+	<input type="text" name="name" placeholder="Net ID" /> </br>
+	<input type="password" name="password1" placeholder="Password" /></br>
+	<input type="password" name="password2" placeholder="Confirm Password" /></br>
+	<input type="text" name="fullname" placeholder="Full Name" /></br>
+	<input type="text" name="major" placeholder="Major" /></br>
+	<input type="submit" value="Sign up">
+</form> 

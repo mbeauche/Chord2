@@ -21,8 +21,10 @@ var Userschema = new Schema({
 var Reservationschema = new Schema({
     username  : { type: String, index: true },
     roomname  : { type: String, lowercase: true, trim: true },
-    Time      : String,
-    date      : Date,
+    startTime : String,
+    endTime   : String,
+    startDate : String,
+    endDate   : String,
     inSwap    : Boolean,
     swapNote  : String
 });
@@ -33,24 +35,85 @@ var Room = mongoose.model('Rooms', Roomschema);
 var Reservation = mongoose.model('Reservations', Reservationschema);
 
 //creates a new reservation
-exports.addReservation = function(username, roomname, time, date, inSwap, swapNote){
-  var reservation = new Reservation({username: username, roomname: roomname, time: time, date: date, inSwap: inSwap, swapNote: swapNote});
+exports.addReservation = function(req, res, username, roomname, startTime, 
+							endTime, startDate, endDate, inSwap, swapNote){
+
+  var reservation = new Reservation();
+  		reservation.username  = username;
+  		reservation.roomname  = roomname;
+  		reservation.startTime = startTime;
+  		reservation.endTime   = endTime;
+  		reservation.startDate = startDate;
+  		reservation.endDate   = endDate;
+  		reservation.inSwap    = inSwap;
+  		reservation.swapNote  = swapNote;
+  
   reservation.save(function(err, result){
-   if(err){
-    console.log(err);
-   } 
+   			if(err){
+    			console.log(err);
+   			}else{
+   				res.render('calendar', {title: "Success eh!", name: "ADMIN VIEW"});
+   			} 
   });
+
 }
 
-//pass in a user's spire id and dates to find resercations
-exports.findReservations = function(user, startdate, enddate){
+//pass in a user's Net ID and dates to find reservations
+exports.findReservations = function(user, startdate, enddate, cb){
+
   var query = Reservation.find();
   query.exec(function(err, results){
     if(err) console.log(err);
     return res.end(JSON.stringify(results));
   });
+
+  //Room.findOne({username:user});
+  Reservations.findOne({username:user, startDate:startdate, endDate:enddate}).run(function(err,user){
+  		cb(user);
+  	});
+  		//this is a call back (cb) function which runs after the query.
+  
+
+};
+
+//User Functions
+exports.validateUser = function(username, password, cb){
+
+	console.log("Logging " + username + " in.");
+
+	User.findOne({username:username, password:password}).run(function (err, user) {
+		cb(user);
+	});
+};
+
+exports.newUser = function(req, res, username, password, fullname, major ){
+
+var user = new User();
+	user.username = username;
+	user.password = password;
+	user.fullname = fullname;
+	user.major    = major;
+
+	User.findOne({username:username}).run(function(err, query){
+		if(query !== null){
+			//we already have this username in the DB! error and try again
+			res.render('loginregister', { title: "Username already in use, try again.", name: "Not Logged In" });
+			
+		}else{
+			
+	user.save(function(err, user_Saved){
+		if(err){
+			throw err;
+			
+		}else{
+			res.render('loginregister', { title: "Creation successful! Please login.", name: "Not Logged In" });
+		}
+	});
+	}
+	});
 }
 
+/*
 //Timer functions
 exports.saveTimer = function(user,timer,cb){
 	newt = new Timer();
@@ -76,12 +139,6 @@ exports.updateTimer = function(user,timer,cb){
 
 	console.log("updating timer");
 
-	//User.findOne({username:user.username, password:user.password}).run(function (err, query) {
-	//	query.update({start:timer.start, end:timer.end});
-		
-	//});
-
-	//User.update({timers._id:timer._id}, {timers.start:timer.start, timers.end:timer.end});
 
 }
 
@@ -110,42 +167,4 @@ var query;
 	
 	});
 };
-
-//User Functions
-exports.validateUser = function(username, password, cb){
-	console.log("got username " + username);
-	console.log(User.find());
-	User.findOne({username:username, password:password}).run(function (err, user) {
-		cb(user);
-	});
-};
-
-exports.newUser = function(req, res, username, password, fullname, major ){
-
-var user = new User();
-	user.username = username;
-	user.password = password;
-	user.fullname = fullname;
-	user.major    = major;
-
-	User.findOne({username:username}).run(function(err, query){
-		if(query !== null){
-			//we already have this username in the DB! error and try again
-			res.render('loginregister', { title: "Username already in use, try again.", name: "Not Logged In" });
-			//return "Username already in use, try again!";
-			
-		}else{
-			
-	user.save(function(err, user_Saved){
-		if(err){
-			throw err;
-			//console.log(err);
-			//return "Something is fucked.";
-		}else{
-			res.render('loginregister', { title: "Creation successful! Please login.", name: "Not Logged In" });
-			//return "Creation successful! Please login now.";
-		}
-	});
-	}
-	});
-}
+*/

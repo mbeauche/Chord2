@@ -7,8 +7,10 @@ var UserControl = require("./UserControl") //login, logout functions
 
 //Index
 exports.index = function(req, res){
-  res.render('index', { title: 'MoodTimer' });
+  res.render('index', { title: 'Chord' });
 };
+
+/*
 
 exports.help = function(req, res){
 
@@ -35,6 +37,9 @@ exports.about = function(req, res){
 
   res.render('about', { title: 'About Us', name: n});
 };
+
+*/
+
 //Chord-relevant functions
 exports.calendar = Calendar.home;
 exports.add = Calendar.add;

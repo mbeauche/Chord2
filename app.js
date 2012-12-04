@@ -59,11 +59,10 @@ app.post('/magic',routes.magic);
 
 //For Calendar
 app.get('/calendar', routes.calendar);
-app.get('/add', routes.add);
+app.post('/add', routes.add);
 app.get('/search', routes.search);
 
 
-app.listen(50080);
+app.listen(80);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 
-//Testing area. Be careful down her'
