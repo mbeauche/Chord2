@@ -61,11 +61,13 @@ exports.addReservation = function(req, res, username, roomname, startTime,
 //pass in a user's Net ID and dates to find reservations
 exports.findReservations = function(user, startdate, enddate, cb){
 
+/*
   var query = Reservation.find();
   query.exec(function(err, results){
     if(err) console.log(err);
     return res.end(JSON.stringify(results));
   });
+*/
 
   //Room.findOne({username:user});
   Reservations.findOne({username:user, startDate:startdate, endDate:enddate}).run(function(err,user){
@@ -81,7 +83,7 @@ exports.validateUser = function(username, password, cb){
 
 	console.log("Logging " + username + " in.");
 
-	User.findOne({username:username, password:password}).run(function (err, user) {
+	User.find({username:username, password:password}).run(function (err, user) {
 		cb(user);
 	});
 };
