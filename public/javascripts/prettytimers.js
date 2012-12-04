@@ -1,61 +1,30 @@
 var num = 0;
 var timers = [];
 var timersOnScreen = 0;
-//Javascript Timer Object
-function Timer(minutes) {
+
+//Javascript Reservation Object
+function Reservation() {
 	this.id = 0;
 	this._id = "";
-	this.start = Math.round((new Date()).getTime() / 1000);
-	this.end = this.start + (minutes * 60);
-	this.duration = minutes;
-	this.type = 0; //default 0 = seconds, 1 = minutes
-	this.comment = "";
-	this.update = function(reset){
+	this.username = "";
+	this.roomname = "";
+	this.startTime = "";
+	this.endTime = "";
+	this.startDate = "";
+	this.endDate = "";
+	this.inSwap = false;
+	this.swapNote = "";
 
-		if(reset == 1){
-			this.start = Math.round((new Date()).getTime() / 1000);
-			this.end = this.start + (this.duration * 60);
-
-			$.post("/timer/update", { timer:this }, function(data) {//updateTimer in TimerControl.js
-			if(data == 1){
-				
-			}
-		});
-
-		}
-
-		now = this.start = Math.round((new Date()).getTime() / 1000); //Current time
-		remaining = (this.end - now); //End time of the timer
-		var text = "Finished";
-		if(remaining-1 >= 0) { text = (Math.ceil((remaining/60)-1) + ":" + remaining%60); }
-		$('#'+this.id+'_ticker').text(text); //Update their own text
-		var progress = (100 - (Math.ceil(((remaining/60 )/this.duration)*100))); //Reverse percentace of timer
-		if(progress >= 100){ progress = 100;}
-		var bar = (progress/100) * 550;
-		$('#'+this.id+'_timer').find('.progress').text(progress + "%").css({'width':bar});
-	};
 }
 //Timer Object
 
-// JavaScript Document bitch
 $(document).ready(function() {
-	//Make Logo super pretty
-	//Animation for site logo
-	$('#moodlogo').hover(
-	function () { //Fade in logo
-		$('#hiddenlogo').stop().fadeTo(2000,1);
-	},
-	function () { //fade out logo.
-		$('#hiddenlogo').stop().fadeTo(500,0);
-	});
-	
-	//run a shitty loop to time timers.
-	window.setInterval(updateTimers, 1000);
-	
 	
 	$("#newtimer").click(function() { //Open New Timer box
 			$.get("/timer/createTimerForm", function(data) { lightBox(600,400,data); });
 	});
+
+	//when page is loaded, retreive all reservations!
 
 	retrieveTimers();
 	
@@ -63,64 +32,50 @@ $(document).ready(function() {
 
 function retrieveTimers(){
 
+
 	$.getJSON("/timer/getUserTimers", function(data) { //Load users timers
-		//alert(data.length + " " + timersOnScreen);
+		//alert(data.length + " " + data[0].roomname + " " + data[1].roomname);
 		for(var i=timersOnScreen; i < data.length; i++)
 		{
-			var t = new Timer();
-			t.start = data[i].start;
-			t.end = data[i].end;
-			t.comment = data[i].comment;
-			t.duration = data[i].duration;
-			t._id = data[i]._id;
-			t.type = data[i].type;
+			var t = new Reservation();
+			t.roomname = data[i].roomname;
+			t.startTime = data[i].startTime;
+			t.endTime = data[i].endTime;
+			t.startDate = data[i].startDate;
+			t.endDate = data[i].endDate;
+			t.inSwap = data[i].inSwap;
+			t.swapNote = data[i].swapNote;
+			//t._id = data[i]._id;
+			//t.type = data[i].type;
 			
-			addTimer(t);
+			addReservation(t);
 
 			timersOnScreen ++;
 		}
 	});
 }
 
-
-function updateTimers(){
-	for(var i=0; i<timers.length; i++){
-		timers[i].update(0);
-	}
-}
-
-
-function addTimer(timer){ //Adds timer to document
+function addReservation(res){ //Adds reservation to document
 	//timers.push( new Timer(minutes) );
 	//var t = new Timer(num, minutes);
 	var timeType;
 	var timeAmount;
-	//set up the min or sec display
-
-	if(timer.type == 1){
-		timeType = 'Minutes';
-		timeAmount = timer.duration;
-	}
-	if(timer.type === 0){
-		timeType = 'Seconds';
-		timeAmount = timer.duration*60;
-	}
 
 	num++;
-	timer.id = num; //Add an ID so the timer can be located in the dom.
-	timers.push(timer);
+	res.id = num; //Add an ID so the timer can be located in the dom.
+	timers.push(res);
 
 	
 	//This is going to be so ugly, but its the easiest way.
 	$('#timers').append(
 		'<div id="'+num+'_timer" class="timerentry" class="timerbutton">'+
-			'<div class="timercomment">'+timer.comment+'</div>'+
-			'<div id="'+num+'_ticker" class="timerdisplay"></div>'+
-			'<div class="removetimerbutton"></div>'+
-			'<div class="restarttimerbutton"></div>'+
-			'<div class="timerduration">Duration: '+timeAmount +' '+timeType+'</div>'+
-			'<div class="progressbar"><div class="progress"></div></div>'+
-			'<div class="timerid">'+timer._id+'</div>'+
+			'<div class="timercomment">'+res.roomname + " " + res.startDate + '</div>'+
+			//'<div id="'+num+'_ticker" class="timerdisplay"></div>'+
+			//'<div class="removetimerbutton"></div>'+
+			//'<div class="restarttimerbutton"></div>'+
+			//'<div class="timerduration">Duration: '+timeAmount +' '+timeType+'</div>'+
+			//'<div class="progressbar"><div class="progress"></div></div>'+
+			'<div class="timerid">'+res._id+'</div>'+
 		'</div>'
 	);
 

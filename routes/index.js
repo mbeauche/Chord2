@@ -3,6 +3,7 @@ var db = require("./Database"); //Database functions and schema
 var Calendar = require("./Calendar"); //Calendar functions. oh my!
 var Search = require("./Search"); //Room Search Functions.
 var UserControl = require("./UserControl") //login, logout functions
+var TimerControl = require("./TimerControl")
 
 
 //Index
@@ -44,6 +45,10 @@ exports.about = function(req, res){
 exports.calendar = Calendar.home;
 exports.add = Calendar.add;
 exports.search = Search.home;
+
+exports.getUserTimers = TimerControl.getUserTimers;
+
+
 
 //User Home
 exports.user = UserControl.home;

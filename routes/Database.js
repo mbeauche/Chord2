@@ -70,8 +70,22 @@ exports.findReservations = function(user, startdate, enddate, cb){
 */
 
   //Room.findOne({username:user});
-  Reservations.findOne({username:user, startDate:startdate, endDate:enddate}).run(function(err,user){
+  Reservation.findOne({username:user, startDate:startdate, endDate:enddate}).run(function(err,user){
   		cb(user);
+  	});
+  		//this is a call back (cb) function which runs after the query.
+  
+
+};
+
+//pass in a user's Net ID and dates to find reservations
+exports.findOpenReservations = function(cb){
+
+  //This will find all reservations which are 
+  Reservation.find({username:""}).run(function(err,results){
+  		//console.log(results);
+
+  		cb(results);
   	});
   		//this is a call back (cb) function which runs after the query.
   
@@ -83,7 +97,8 @@ exports.validateUser = function(username, password, cb){
 
 	console.log("Logging " + username + " in.");
 
-	User.find({username:username, password:password}).run(function (err, user) {
+	User.findOne({username:username, password:password}).run(function (err, user) {
+		console.log("found " + user.username);
 		cb(user);
 	});
 };

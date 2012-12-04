@@ -1,3 +1,4 @@
 exports.home = function(req, res){
-  res.render('search', { name: 'Amanda', title: 'Search for Rooms' } );
+	var user = req.session.user.username;
+  res.render('search', { name: user, title: 'Search for Rooms' } );
 }

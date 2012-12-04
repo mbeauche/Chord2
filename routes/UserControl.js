@@ -48,7 +48,7 @@ exports.validatelogin = function(req, res){
 	var uname = req.body.usname;
 	var pword = req.body.password3;
 	if(uname != null && pword != null){
-		console.log("Attempting to validate user.");
+		console.log("Attempting to validate user " + uname);
 		db.validateUser(uname,pword, function(user){
 			if(user !== null){ console.log(user.username);
 				req.session.user = user;
