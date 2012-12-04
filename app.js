@@ -57,8 +57,13 @@ app.get('/timer/getUserTimers', routes.getUserTimers); //returns JSON of timers 
 //magic
 app.post('/magic',routes.magic);
 
+//For Calendar
+app.get('/calendar', routes.calendar);
+app.get('/add', routes.add);
+app.get('/search', routes.search);
 
-app.listen(80);
+
+app.listen(50080);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 
 //Testing area. Be careful down her'

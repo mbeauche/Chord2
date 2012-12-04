@@ -30,7 +30,26 @@ var Reservationschema = new Schema({
 
 var User = mongoose.model('Users', Userschema);
 var Room = mongoose.model('Rooms', Roomschema);
-var Reservations = mongoose.model('Reservations', Reservationschema);
+var Reservation = mongoose.model('Reservations', Reservationschema);
+
+//creates a new reservation
+exports.addReservation = function(username, roomname, time, date, inSwap, swapNote){
+  var reservation = new Reservation({username: username, roomname: roomname, time: time, date: date, inSwap: inSwap, swapNote: swapNote});
+  reservation.save(function(err, result){
+   if(err){
+    console.log(err);
+   } 
+  });
+}
+
+//pass in a user's spire id and dates to find resercations
+exports.findReservations = function(user, startdate, enddate){
+  var query = Reservation.find();
+  query.exec(function(err, results){
+    if(err) console.log(err);
+    return res.end(JSON.stringify(results));
+  });
+}
 
 //Timer functions
 exports.saveTimer = function(user,timer,cb){

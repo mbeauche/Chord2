@@ -1,7 +1,8 @@
 var db = require("./Database"); //Database functions and schema
 
-var UserControl = require("./UserControl"); //Login and register functions and related functions
-var TimerControl = require("./TimerControl"); //Functions for timer management
+var Calendar = require("./Calendar"); //Calendar functions. oh my!
+var Search = require("./Search"); //Room Search Functions.
+var UserControl = require("./UserControl") //login, logout functions
 
 
 //Index
@@ -34,16 +35,13 @@ exports.about = function(req, res){
 
   res.render('about', { title: 'About Us', name: n});
 };
+//Chord-relevant functions
+exports.calendar = Calendar.home;
+exports.add = Calendar.add;
+exports.search = Search.home;
 
 //User Home
 exports.user = UserControl.home;
-
-//Timer Management Routes
-exports.updateTimer = TimerControl.updateTimer;
-exports.createTimer = TimerControl.createTimer;
-exports.deleteTimer = TimerControl.deleteTimer;
-exports.createTimerForm = TimerControl.createTimerForm;
-exports.getUserTimers = TimerControl.getUserTimers;
 
 //Login/register pages and functions
 exports.logout = UserControl.logout;
