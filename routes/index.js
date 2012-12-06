@@ -48,6 +48,12 @@ exports.search = Search.home;
 
 exports.getUserTimers = TimerControl.getUserTimers;
 
+//lets just keep these here for now...
+exports.updateTimer = TimerControl.updateTimer;
+exports.createTimer = TimerControl.createTimer;
+exports.deleteTimer = TimerControl.deleteTimer;
+exports.createTimerForm = TimerControl.createTimerForm;
+
 
 
 //User Home

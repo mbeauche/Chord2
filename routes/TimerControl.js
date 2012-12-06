@@ -14,7 +14,7 @@ exports.createTimer = function(req, res){ //Called by Javascript
 	});
 };
 exports.deleteTimer = function(req, res){
-
+console.log("Just reserved ");
 	if(req.body.timer == null){
 		res.send("0");
 		return;
@@ -22,17 +22,21 @@ exports.deleteTimer = function(req, res){
 
 	var user = req.session.user; //User is logged in.
 	var timer = req.body.timer; //Be sure to pass timer objects for easy expandability
-	db.deleteTimer(user, timer, function(success, newuser){
+
+	console.log("Just reserved " + timer.roomtype); 
+	res.send("1");//have to send a resposne!
+
+	/*db.deleteTimer(user, timer, function(success, newuser){
 		if(success){
 			req.session.user = newuser; //Update user session key.
 			res.send("1");
 		} else {
 			res.send("0");
 		}
-	}); //Timer object, as usual.
+	}); //Timer object, as usual.*/
 };
 
-exports.updateTimer = function(req,res){
+/*exports.updateTimer = function(req,res){
 
 	var user = req.session.user; //User is logged in.
 	var timer = req.body.timer; //Be sure to pass timer objects for easy expandability
@@ -45,11 +49,17 @@ exports.updateTimer = function(req,res){
 		}
 	}); //Timer object, as usual.
 
-}
+}*/
 
 //Create Timer form, for timer creation
 exports.createTimerForm = function(req, res){
-	res.render('createTimerForm', { layout: false });
+
+	var reserve = req.body.data;
+
+	console.log("just got here " + reserve.roomtype);
+
+	res.render('createTimerForm', { layout: false, type: reserve.roomtype, location: reserve.location, startdate: reserve.startDate, enddate: reserve.endDate,
+									starttime: reserve.startTime, endtime: reserve.endTime  });
 };
 
 exports.getUserTimers = function(req, res){ //Returs JSON of users timers
@@ -59,7 +69,7 @@ exports.getUserTimers = function(req, res){ //Returs JSON of users timers
 
 		//var user = req.session.user;
 		db.findOpenReservations( function(reservations){
-			console.log(reservations);
+			//console.log(reservations);
 			//console.log(reservations);
 
 			//req.session.user = newuser; //Pulls reservations from DB.

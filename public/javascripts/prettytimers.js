@@ -7,7 +7,8 @@ function Reservation() {
 	this.id = 0;
 	this._id = "";
 	this.username = "";
-	this.roomname = "";
+	this.roomtype = "";
+	this.location = "";
 	this.startTime = "";
 	this.endTime = "";
 	this.startDate = "";
@@ -38,7 +39,8 @@ function retrieveTimers(){
 		for(var i=timersOnScreen; i < data.length; i++)
 		{
 			var t = new Reservation();
-			t.roomname = data[i].roomname;
+			t.roomtype = data[i].roomType;
+			t.location = data[i].location;
 			t.startTime = data[i].startTime;
 			t.endTime = data[i].endTime;
 			t.startDate = data[i].startDate;
@@ -56,20 +58,18 @@ function retrieveTimers(){
 }
 
 function addReservation(res){ //Adds reservation to document
-	//timers.push( new Timer(minutes) );
-	//var t = new Timer(num, minutes);
-	var timeType;
-	var timeAmount;
-
+	
 	num++;
 	res.id = num; //Add an ID so the timer can be located in the dom.
 	timers.push(res);
-
 	
 	//This is going to be so ugly, but its the easiest way.
 	$('#timers').append(
-		'<div id="'+num+'_timer" class="timerentry" class="timerbutton">'+
-			'<div class="timercomment">'+res.roomname + " " + res.startDate + '</div>'+
+		'<div id="'+num+'_timer" class="timerentry" >'+
+			'<div class="timercomment">'+res.roomtype + " room in " + res.location + '</div>'+ 
+			'<div class ="reservebutton">  </div>'+
+			'<div class ="timerduration">'+ res.startDate + " " + res.startTime + " to " + res.endTime + '<div>' +
+			
 			//'<div id="'+num+'_ticker" class="timerdisplay"></div>'+
 			//'<div class="removetimerbutton"></div>'+
 			//'<div class="restarttimerbutton"></div>'+
@@ -85,21 +85,31 @@ function addReservation(res){ //Adds reservation to document
 
 function bindTimerButtons(){
 	
-	$('.removetimerbutton').unbind(); //Unbind all previous events so they dont overlap
+	$('.timerentry').unbind(); //Unbind all previous events so they dont overlap
 	$('.restarttimerbutton').unbind(); //Unbind all previous events so they dont overlap
 
-	$('.removetimerbutton').click(function(){ //Event for when the timers delete button is clicked
-		var index = ($(this).parent().attr("id").substring(0,1)) - 1; //Get ID of timer in global timer array.
-		//alert(timers[index].comment);
-		//var id = $(this).parent().find('.timerid');
-		var box = $(this).parent();
-		$.post("/timer/delete", { timer:timers[index] }, function(data) {//deleteTimer in TimerControl.js
+
+	//function for detecting a click on the reservation div
+	$('.timerentry').click(function(){
+
+		var index = ($(this).attr("id").substring(0,1)) - 1; //Get ID of timer in global timer array.
+
+		//alert(timers[index].roomtype);
+
+		var box = $(this);
+
+		$.post("/timer/createTimerForm", {data:(timers[index]) }, function(data) { lightBox(600,400,data); });
+
+		/*$.post("/timer/delete", { timer:(timers[index]) }, function(data){//deleteTimer in TimerControl.js
+			alert("YEA");
 			if(data == 1) {
+				alert("REMOVING");
 				timersOnScreen--;
 				box.fadeOut('slow'); //Remove timer on success
 			}
-		});
+		}); */
 	});
+
 	$('.restarttimerbutton').click(function(){
 		var index = ($(this).parent().attr("id").substring(0,1)) - 1;
 		var t = timers[index];

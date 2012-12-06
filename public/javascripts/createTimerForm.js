@@ -10,11 +10,11 @@ $(document).ready(function() {
 	});//
 
 	//Submit by hitting enter
-	$('#timername').keyup(function(event) {
+	/*$('#timername').keyup(function(event) {
 		if((event.keyCode || event.which) == '13'){
 			submitForm();
 		}
-	});
+	});*/
 
 	function submitForm(){
 		if(seconds){ runtime = runtime/60; }
@@ -63,7 +63,7 @@ $(document).ready(function() {
 	*/
 	
 	//Timer window and duration adjustment buttons
-	$("#durationminus").click(function() {
+	/*$("#durationminus").click(function() {
 			runtime--;
 			if(runtime <= 0){ runtime = 59; }
 			updateDuration(runtime);
@@ -90,6 +90,6 @@ $(document).ready(function() {
 			$("#durationminutes").css('background','url(/images/buttonbg.png) repeat-x top #FFF'); //Select
 			seconds = true;
 			minutes = false;
-	});
+	});*/
 	
 });

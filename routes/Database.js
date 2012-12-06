@@ -3,11 +3,11 @@ var mongoose = require('mongoose') , Schema = mongoose.Schema;
 //Connect to database
 var db = mongoose.connect('mongodb://127.0.0.1/chord');
 
-var Roomschema = new Schema({
+/*var Roomschema = new Schema({
 	roomname	:String,
 	roomtype	:String,
 	location	:String
-});
+});*/
 
 var Userschema = new Schema({
 	username	:{ type: String, index: true, unique: true, lowercase: true },
@@ -20,7 +20,8 @@ var Userschema = new Schema({
 
 var Reservationschema = new Schema({
     username  : { type: String, index: true },
-    roomname  : { type: String, lowercase: true, trim: true },
+    roomType  : String,
+    location  : String,
     startTime : String,
     endTime   : String,
     startDate : String,
@@ -35,12 +36,13 @@ var Room = mongoose.model('Rooms', Roomschema);
 var Reservation = mongoose.model('Reservations', Reservationschema);
 
 //creates a new reservation
-exports.addReservation = function(req, res, username, roomname, startTime, 
+exports.addReservation = function(req, res, username, roomType, location, startTime, 
 							endTime, startDate, endDate, inSwap, swapNote){
 
   var reservation = new Reservation();
   		reservation.username  = username;
-  		reservation.roomname  = roomname;
+  		reservation.roomType  = roomType;
+  		reservation.location  = location;
   		reservation.startTime = startTime;
   		reservation.endTime   = endTime;
   		reservation.startDate = startDate;
@@ -98,7 +100,7 @@ exports.validateUser = function(username, password, cb){
 	console.log("Logging " + username + " in.");
 
 	User.findOne({username:username, password:password}).run(function (err, user) {
-		console.log("found " + user.username);
+		//console.log("found " + user.username);
 		cb(user);
 	});
 };

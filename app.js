@@ -51,7 +51,8 @@ app.get('/user/:id', routes.user);
 app.post('/timer/update', routes.updateTimer);
 app.post('/timer/create', routes.createTimer);
 app.post('/timer/delete', routes.deleteTimer);
-app.get('/timer/createTimerForm', routes.createTimerForm);
+
+app.post('/timer/createTimerForm', routes.createTimerForm);
 app.get('/timer/getUserTimers', routes.getUserTimers); //returns JSON of timers in user object
 
 //magic

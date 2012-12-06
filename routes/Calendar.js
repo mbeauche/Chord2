@@ -14,7 +14,10 @@ exports.home = function(req, res){
 exports.add = function(req, res){
 
 	var uname = req.body.username;
-	var rname = req.body.roomname;
+
+	var rtype = req.body.roomtype;
+	var locat = req.body.location;
+
 	var stime = req.body.starttime;
 	var etime = req.body.endtime;
 	var sdate = req.body.startdate;
@@ -22,6 +25,6 @@ exports.add = function(req, res){
 	var inswap = req.body.inswap;
 	var swapnote = req.body.swapnote;
 
-	db.addReservation(req, res, uname, rname, stime, etime, sdate, edate, inswap, swapnote);
+	db.addReservation(req, res, uname, rtype, locat, stime, etime, sdate, edate, inswap, swapnote);
 }
 
